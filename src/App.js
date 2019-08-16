@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import UsersGrid from "./components/UsersGrid";
+import {Button} from "@material-ui/core";
+
+const user = {
+	fullName: 'test test',
+	image: 'https://randomuser.me/api/portraits/women/28.jpg',
+	email: 'test@test.com'
+};
+const users = [user, user, user, user, user, user, user, user, user, user];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+			<React.Fragment>
+				<div className="buttons">
+					<Button variant="contained" color="primary">
+						New
+					</Button>
+					<Button variant="contained" color="primary">
+						Random
+					</Button>
+				</div>
+				<UsersGrid users={users}/>
+			</React.Fragment>
+	)
 }
 
-export default App;
+export default App
