@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import UserCard from "./UserCard";
 
 const UsersGrid = ({users}) => {

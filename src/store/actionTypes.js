@@ -1,0 +1,1 @@
+export const CREATE_RANDOM_USER = 'CREATE_RANDOM_USER';
