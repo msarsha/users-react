@@ -7,7 +7,7 @@ const user = {
 };
 
 const initialState = {
-	users: [user, user, user, user, user, user, user, user, user, user]
+	users: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
 		case CREATE_RANDOM_USER: {
 			return {
 				...state,
-				users: [user, ...state.users]
+				users: [action.payload.user, ...state.users]
 			}
 		}
 		default:

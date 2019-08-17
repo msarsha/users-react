@@ -4,6 +4,7 @@ import UsersGrid from "./components/UsersGrid";
 import {Button} from "@material-ui/core";
 import {connect} from "react-redux";
 import {createRandom} from "./store/actions";
+import NoUsers from "./components/NoUsers";
 
 function App(props) {
 	return (
@@ -16,7 +17,7 @@ function App(props) {
 						Random
 					</Button>
 				</div>
-				{<UsersGrid users={props.users}/>}
+				{props.users.length ? <UsersGrid users={props.users}/> : <NoUsers/>}
 			</React.Fragment>
 	)
 }

@@ -4,7 +4,7 @@ import UserCard from "./UserCard";
 const UsersGrid = ({users}) => {
 	return (
 			<div className='users-grid'>
-				{users.map((user, i) => <UserCard key={i} user={user}/>)}
+				{users.map((user) => <UserCard key={user.id} user={user}/>)}
 			</div>
 	);
 };
