@@ -5,7 +5,7 @@ import {Button} from "@material-ui/core";
 
 const user = {
 	fullName: 'test test',
-	image: 'https://randomuser.me/api/portraits/women/28.jpg',
+	image: 'https://randomuser.me/api/portraits/men/22.jpg',
 	email: 'test@test.com'
 };
 const users = [user, user, user, user, user, user, user, user, user, user];
