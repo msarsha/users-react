@@ -2,15 +2,17 @@ import * as actionCreators from "./actionCreators";
 
 export const createRandom = () => {
 	return async (dispatch) => {
-		const randomUserResult = await fetch('https://randomuser.me/api/?inc=name,email,picture').then(res => res.json());
+		const randomUserResult = await fetch('https://randomuser.me/api/?inc=name,email,picture,login,dob,location').then(res => res.json());
 		const mappedUser = randomUserResult.results.map(userResultMapper)[0];
 		dispatch(actionCreators.createRandom(mappedUser));
 	};
 };
 
-const userResultMapper = (user) => ({
-	email: user.email,
-	fullName: `${user.name.first} ${user.name.last}`,
-	image: user.picture.large,
-	id: (new Date()).getTime()
+const userResultMapper = ({email, name,picture,login, dob, location}) => ({
+	email: email,
+	fullName: `${name.first} ${name.last}`,
+	image: picture.large,
+	id: login.uuid,
+	bday: new Date(dob.date),
+	address: location.street
 });

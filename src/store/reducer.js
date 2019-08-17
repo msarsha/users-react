@@ -1,11 +1,5 @@
 import {CREATE_RANDOM_USER} from "./actionTypes";
 
-const user = {
-	fullName: 'test test',
-	image: 'https://randomuser.me/api/portraits/men/22.jpg',
-	email: 'test@test.com'
-};
-
 const initialState = {
 	users: []
 };
