@@ -8,9 +8,10 @@ const initialState = {
 	}
 };
 
+//TODO split reducers and use combineReducers
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case actionTypes.CREATE_RANDOM_USER: {
+		case actionTypes.CREATE_USER: {
 			return {
 				...state,
 				users: [action.payload.user, ...state.users]

@@ -28,7 +28,7 @@ const UserCard = ({user}) => {
 						component="img"
 						alt="Contemplative Reptile"
 						height="250"
-						image={user.image}
+						image={user.image || 'https://randomuser.me/api/portraits/men/47.jpg'}
 						title="Contemplative Reptile"
 				/>
 				<CardContent>

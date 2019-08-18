@@ -1,7 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
-export const createRandom = (user) => ({
-	type: actionTypes.CREATE_RANDOM_USER,
+export const createUser = (user) => ({
+	type: actionTypes.CREATE_USER,
 	payload: {user}
 });
 

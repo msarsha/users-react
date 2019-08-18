@@ -3,7 +3,7 @@ import './App.css'
 import UsersGrid from "./components/UsersGrid";
 import {Button} from "@material-ui/core";
 import {connect} from "react-redux";
-import {createRandom, openModal} from "./store/actions";
+import {createRandomUser, openModal} from "./store/actions";
 import NoUsers from "./components/NoUsers";
 import Dialog from "@material-ui/core/Dialog";
 import ModalContainer from "./components/modals/ModalContainer";
@@ -21,8 +21,7 @@ function App(props) {
 						Random
 					</Button>
 				</div>
-				{props.users.length ? <
-					ersGrid users={props.users}/> : <NoUsers/>}
+				{props.users.length ? <UsersGrid users={props.users}/> : <NoUsers/>}
 
 				<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
 					<ModalContainer/>
@@ -38,7 +37,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
 	return {
 		createRandom: () => {
-			dispatch(createRandom())
+			dispatch(createRandomUser())
 		},
 		newUserModal: () => {
 			dispatch(openModal(modalTypes.NEW_USER))
