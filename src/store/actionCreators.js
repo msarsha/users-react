@@ -1,6 +1,15 @@
-import {CREATE_RANDOM_USER} from "./actionTypes";
+import * as actionTypes from "./actionTypes";
 
 export const createRandom = (user) => ({
-	type: CREATE_RANDOM_USER,
+	type: actionTypes.CREATE_RANDOM_USER,
 	payload: {user}
+});
+
+export const openModal = (type, props) => ({
+	type: actionTypes.OPEN_MODAL,
+	payload: {props, type}
+});
+
+export const closeModal = () => ({
+	type: actionTypes.CLOSE_MODAL
 });

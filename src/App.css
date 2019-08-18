@@ -38,3 +38,17 @@
   flex-direction: column;
   align-items: center;
 }
+
+.modal-container {
+  padding: 30px;
+}
+
+.user-modal-form {
+  margin: 50px auto;
+  max-width: 800px;
+}
+
+.user-modal-toolbar {
+  display: flex;
+  justify-content: space-between;
+}

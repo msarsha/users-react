@@ -8,7 +8,11 @@ export const createRandom = () => {
 	};
 };
 
-const userResultMapper = ({email, name,picture,login, dob, location}) => ({
+export const openModal = (type, props = null) => dispatch => {
+	dispatch(actionCreators.openModal(type, props));
+};
+
+const userResultMapper = ({email, name, picture, login, dob, location}) => ({
 	email: email,
 	fullName: `${name.first} ${name.last}`,
 	image: picture.large,
