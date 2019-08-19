@@ -1,5 +1,9 @@
 import * as actionCreators from "./actionCreators";
 
+export const openModal = (type, props = null) => dispatch => {
+	dispatch(actionCreators.openModal(type, props));
+};
+
 export const createRandomUser = () => {
 	return async (dispatch) => {
 		const randomUserResult = await fetch('https://randomuser.me/api/?inc=name,email,picture,login,dob,location').then(res => res.json());
@@ -8,25 +12,33 @@ export const createRandomUser = () => {
 	};
 };
 
-export const openModal = (type, props = null) => dispatch => {
-	dispatch(actionCreators.openModal(type, props));
-};
-
-export const createUser = (user) => dispatch => {
-	// mock request to server
-	setTimeout(() => {
+export const createUserAndCloseModal = (user) => dispatch => {
+	mockRequestAndCloseModal(dispatch).then(() => {
 		const userWithId = {...user, id: (new Date()).getTime()};
 		dispatch(actionCreators.createUser(userWithId));
-		dispatch(actionCreators.closeModal());
-	}, 1000)
+	});
 };
 
-export const editUser = (user) => dispatch => {
-	// mock request to server
-	setTimeout(() => {
+export const editUserAndCloseModal = (user) => dispatch => {
+	mockRequestAndCloseModal(dispatch).then(() => {
 		dispatch(actionCreators.editUser(user));
-		dispatch(actionCreators.closeModal());
-	}, 1000)
+	})
+};
+
+export const deleteUserAndCloseModal = (user) => dispatch => {
+	mockRequestAndCloseModal(dispatch).then(() => {
+		dispatch(actionCreators.deleteUser(user));
+	});
+};
+
+const mockRequestAndCloseModal = (dispatcher) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, 1000)
+	}).then(() => {
+		dispatcher(actionCreators.closeModal());
+	})
 };
 
 const userResultMapper = ({email, name, picture, login, dob, location}) => ({

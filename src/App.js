@@ -10,25 +10,30 @@ import ModalContainer from "./components/modals/ModalContainer";
 import {modalTypes} from "./components/modals/modalTypes";
 import {closeModal} from "./store/actionCreators";
 
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import DateFnsUtils from "@date-io/date-fns";
+
 function App(props) {
 	return (
-			<React.Fragment>
-				<div className="buttons">
-					<Button variant="contained" color="primary" onClick={props.newUserModal}>
-						New
-					</Button>
-					<Button variant="contained" color="primary" onClick={props.createRandom}>
-						Random
-					</Button>
-				</div>
-				{props.users.length ? <UsersGrid users={props.users} onEdit={(user) => {
-					props.editUserModal(user);
-				}}/> : <NoUsers/>}
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<React.Fragment>
+					<div className="buttons">
+						<Button variant="contained" color="primary" onClick={props.newUserModal}>
+							New
+						</Button>
+						<Button variant="contained" color="primary" onClick={props.createRandom}>
+							Random
+						</Button>
+					</div>
+					{props.users.length ? <UsersGrid users={props.users} onEdit={(user) => {
+						props.editUserModal(user);
+					}}/> : <NoUsers/>}
 
-				<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
-					<ModalContainer/>
-				</Dialog>
-			</React.Fragment>
+					<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
+						<ModalContainer/>
+					</Dialog>
+				</React.Fragment>
+			</MuiPickersUtilsProvider>
 	)
 }
 

@@ -6,8 +6,9 @@ import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import {createUser, editUser} from "../../store/actions";
+import {createUserAndCloseModal, deleteUserAndCloseModal, editUserAndCloseModal} from "../../store/actions";
 import {modalTypes} from "./modalTypes";
+import {KeyboardDatePicker} from "@material-ui/pickers";
 
 const actionTypes = {
 	INPUT_CHANGE: 'INPUT_CHANGE',
@@ -60,6 +61,17 @@ const NewEditUserModal = (props) => {
 		return props.type === modalTypes.NEW_USER ? 'Create New User' : 'Edit User';
 	};
 
+	function isEditMode() {
+		return props.type === modalTypes.EDIT_USER;
+	}
+
+	function getDeleteButtonStyle() {
+		return {
+			display: isEditMode() ? 'inline-block' : 'none',
+			margin: '0 10px'
+		};
+	}
+
 	return (
 			<React.Fragment>
 				<AppBar>
@@ -70,14 +82,6 @@ const NewEditUserModal = (props) => {
 						<Typography variant="h5">
 							{modalHeader()}
 						</Typography>
-						<Button
-								color="inherit"
-								disabled={!valid}
-								onClick={() => {
-									props.saveUser(state, props.type)
-								}}>
-							SAVE
-						</Button>
 					</Toolbar>
 				</AppBar>
 				<form className="user-modal-form" ref={(node) => {
@@ -97,6 +101,15 @@ const NewEditUserModal = (props) => {
 							/>
 						</div>
 					</label>
+					<KeyboardDatePicker
+							margin="normal"
+							label="Birth Date"
+							format="dd/MM/yyyy"
+							value={state['bday'] || new Date()}
+							onChange={(e) => {
+								handleInputChange('bday', e);
+							}}
+					/>
 					{fields.map(f => (
 							<TextField
 									key={f.name}
@@ -113,10 +126,29 @@ const NewEditUserModal = (props) => {
 									required
 							/>
 					))}
+					<div>
+						<Button
+								variant="contained"
+								style={getDeleteButtonStyle()}
+								color="secondary"
+								onClick={() => {
+									props.deleteUser(state)
+								}}>
+							DELETE
+						</Button>
+						<Button
+								variant="contained"
+								color="inherit"
+								disabled={!valid}
+								onClick={() => {
+									props.saveUser(state, props.type)
+								}}>
+							SAVE
+						</Button>
+					</div>
 				</form>
 			</React.Fragment>
-	)
-			;
+	);
 };
 
 const mapStateToProps = (state) => {
@@ -132,8 +164,11 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		saveUser: (user, modalType) => {
 			modalType === modalTypes.NEW_USER ?
-			dispatch(createUser(user)) :
-					dispatch(editUser(user))
+					dispatch(createUserAndCloseModal(user)) :
+					dispatch(editUserAndCloseModal(user))
+		},
+		deleteUser: (user) => {
+			dispatch(deleteUserAndCloseModal(user))
 		}
 	};
 };

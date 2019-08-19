@@ -8,7 +8,7 @@ const initialState = {
 	}
 };
 
-//TODO split reducers and use combineReducers
+//TODO split reducers and use combineReducers (modal reducer, users reducer)
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.CREATE_USER: {
@@ -20,14 +20,23 @@ const reducer = (state = initialState, action) => {
 		case actionTypes.EDIT_USER: {
 			const {users} = state;
 			const editedUser = action.payload;
-			const updatedUsers = users.map(u => {
-				return u.id === editedUser.id ? editedUser : u;
-			});
+			const updatedUsers = users.map(u => u.id === editedUser.id ? editedUser : u);
 
 			return {
 				...state,
 				users: updatedUsers
 			}
+		}
+		case actionTypes.DELETE_USER: {
+			console.log('delete');
+			const {users} = state;
+			const deletedUser = action.payload;
+			const updatedUsers = users.filter(u => u.id !== deletedUser.id);
+
+			return {
+				...state,
+				users: [...updatedUsers]
+			};
 		}
 		case actionTypes.OPEN_MODAL: {
 			return {

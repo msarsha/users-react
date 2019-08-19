@@ -1,3 +1,4 @@
+export var DELETE_USER = 'DELETE_USER';
 export var CREATE_USER = "CREATE_USER";
 export var EDIT_USER = "EDIT_USER";
 

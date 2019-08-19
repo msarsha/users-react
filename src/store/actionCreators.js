@@ -5,14 +5,19 @@ export const createUser = (user) => ({
 	payload: {user}
 });
 
-export const openModal = (type, props) => ({
-	type: actionTypes.OPEN_MODAL,
-	payload: {props, type}
-});
-
 export const editUser = (user) => ({
 	type: actionTypes.EDIT_USER,
 	payload: user
+});
+
+export const deleteUser = (user) => ({
+	type: actionTypes.DELETE_USER,
+	payload: user
+});
+
+export const openModal = (type, props) => ({
+	type: actionTypes.OPEN_MODAL,
+	payload: {props, type}
 });
 
 export const closeModal = () => ({
