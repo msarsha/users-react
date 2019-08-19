@@ -1,32 +1,32 @@
 .user-modal-form {
-	margin: 50px auto;
-	max-width: 800px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  margin: 50px auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .user-modal-toolbar h5 {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .image-picker-container {
-	position: relative;
-	cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 
 .image-picker-container:hover:before {
-	content: "Pick Image";
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.33);
+  content: 'Pick Image';
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.33);
 }
