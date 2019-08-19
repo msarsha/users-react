@@ -51,27 +51,51 @@
 	align-items: center;
 }
 
-.user-modal-toolbar h5{
+.user-modal-toolbar h5 {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 }
 
 .image-picker-container {
-  position: relative;
-  cursor: pointer;
+	position: relative;
+	cursor: pointer;
 }
 
 .image-picker-container:hover:before {
-  content:"Pick Image";
+	content: "Pick Image";
 	font-size: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right:0;
-  background-color: rgba(0,0,0,0.33);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.33);
+}
+
+.user-view-modal {
+	display: flex;
+	flex-direction: column;
+}
+
+.user-view-modal img {
+	object-fit: cover;
+}
+
+.user-view-modal span {
+	font-weight: bold;
+}
+
+.user-view-group {
+	display: flex;
+	align-items: center;
+}
+
+.user-view-modal .user-view-close-btn {
+	position: absolute;
+	right: 0;
+	top: -7px;
 }

@@ -14,23 +14,37 @@ import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from "@date-io/date-fns";
 
 function App(props) {
+	function renderUsersGrid() {
+		return (
+				<UsersGrid
+						users={props.users}
+						onEdit={(user) => {
+							props.editUserModal(user);
+						}}
+						onView={(user) => {
+							props.viewUser(user)
+						}}
+				/>
+		);
+	}
+
 	return (
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-					<div className="buttons">
-						<Button variant="contained" color="primary" onClick={props.newUserModal}>
-							New
-						</Button>
-						<Button variant="contained" color="primary" onClick={props.createRandom}>
-							Random
-						</Button>
-					</div>
-					{props.users.length ? <UsersGrid users={props.users} onEdit={(user) => {
-						props.editUserModal(user);
-					}}/> : <NoUsers/>}
+				<div className="buttons">
+					<Button variant="contained" color="primary" onClick={props.newUserModal}>
+						New
+					</Button>
+					<Button variant="contained" color="primary" onClick={props.createRandom}>
+						Random
+					</Button>
+				</div>
+				{props.users.length ?
+						renderUsersGrid()
+						: <NoUsers/>}
 
-					<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
-						<ModalContainer/>
-					</Dialog>
+				<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
+					<ModalContainer/>
+				</Dialog>
 			</MuiPickersUtilsProvider>
 	)
 }
@@ -52,6 +66,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		closeModal: () => {
 			dispatch(closeModal());
+		},
+		viewUser: (user) => {
+			dispatch(openModal(modalTypes.VIEW_USER, {user}))
 		}
 	}
 };

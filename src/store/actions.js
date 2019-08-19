@@ -15,6 +15,7 @@ export const createRandomUser = () => {
 export const createUserAndCloseModal = (user) => dispatch => {
 	mockRequestAndCloseModal(dispatch).then(() => {
 		const userWithId = {...user, id: (new Date()).getTime()};
+		userWithId.image = user.image || 'https://via.placeholder.com/600x400';
 		dispatch(actionCreators.createUser(userWithId));
 	});
 };
