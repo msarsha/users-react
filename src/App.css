@@ -51,9 +51,10 @@
 	align-items: center;
 }
 
-.user-modal-toolbar {
-	display: flex;
-	justify-content: space-between;
+.user-modal-toolbar h5{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .image-picker-container {
