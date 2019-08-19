@@ -9,7 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import {createUser} from "../../store/actions";
 
 const actionTypes = {
-	INPUT_CHANGE: 'INPUT_CHANGE'
+	INPUT_CHANGE: 'INPUT_CHANGE',
+	FILE_CHANGE: 'FILE_CHANGE'
 };
 
 const userFormReducer = (state, action) => {
@@ -28,12 +29,11 @@ const userFormReducer = (state, action) => {
 const fields = [
 	{name: 'fullName', label: 'Full Name'},
 	{name: 'address', label: 'Address'},
-	{name: 'email', label: 'Email'}
+	{name: 'email', label: 'Email', type: 'email'}
 ];
 
 const NewEditUserModal = (props) => {
 	let form;
-
 
 	const [valid, setValid] = useState(false);
 	const [state, dispatch] = useReducer(userFormReducer, props.user || {});
@@ -41,6 +41,14 @@ const NewEditUserModal = (props) => {
 	const handleInputChange = (name, value) => {
 		dispatch({type: actionTypes.INPUT_CHANGE, value, name});
 		setValid(form.checkValidity());
+	};
+
+	const handleFileChange = (name, value) => {
+		const fr = new FileReader();
+		fr.onloadend = (({target}) => {
+			dispatch({type: actionTypes.INPUT_CHANGE, value: target.result, name})
+		});
+		fr.readAsDataURL(value);
 	};
 
 	return (
@@ -66,9 +74,24 @@ const NewEditUserModal = (props) => {
 				<form className="user-modal-form" ref={(node) => {
 					form = node
 				}}>
+					<label htmlFor="image-picker-input">
+						<div className="image-picker-container">
+							<img src={state.image || 'https://via.placeholder.com/600x400'} height="350" alt="avatar"/>
+							<input
+									accept="image/*"
+									id="image-picker-input"
+									type="file"
+									style={{display: 'none'}}
+									onChange={(e) => {
+										handleFileChange('image', e.target.files[0])
+									}}
+							/>
+						</div>
+					</label>
 					{fields.map(f => (
 							<TextField
 									key={f.name}
+									type={f.type || 'text'}
 									value={state[f.name] || ''}
 									onChange={(e) => {
 										handleInputChange(f.name, e.target.value)
@@ -83,7 +106,8 @@ const NewEditUserModal = (props) => {
 					))}
 				</form>
 			</React.Fragment>
-	);
+	)
+			;
 };
 
 const mapDispatchToProps = (dispatch) => {
