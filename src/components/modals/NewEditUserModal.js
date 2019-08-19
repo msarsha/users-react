@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import {Button} from "@material-ui/core";
 import {closeModal} from "../../store/actionCreators";
 import {connect} from "react-redux";
@@ -6,7 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import {createUser} from "../../store/actions";
+import {createUser, editUser} from "../../store/actions";
+import {modalTypes} from "./modalTypes";
 
 const actionTypes = {
 	INPUT_CHANGE: 'INPUT_CHANGE',
@@ -38,6 +39,10 @@ const NewEditUserModal = (props) => {
 	const [valid, setValid] = useState(false);
 	const [state, dispatch] = useReducer(userFormReducer, props.user || {});
 
+	useEffect(() => {
+		setValid(form.checkValidity());
+	}, [form]);
+
 	const handleInputChange = (name, value) => {
 		dispatch({type: actionTypes.INPUT_CHANGE, value, name});
 		setValid(form.checkValidity());
@@ -51,6 +56,10 @@ const NewEditUserModal = (props) => {
 		fr.readAsDataURL(value);
 	};
 
+	const modalHeader = () => {
+		return props.type === modalTypes.NEW_USER ? 'Create New User' : 'Edit User';
+	};
+
 	return (
 			<React.Fragment>
 				<AppBar>
@@ -59,13 +68,13 @@ const NewEditUserModal = (props) => {
 							CLOSE
 						</Button>
 						<Typography variant="h5">
-							Create New User
+							{modalHeader()}
 						</Typography>
 						<Button
 								color="inherit"
 								disabled={!valid}
 								onClick={() => {
-									props.createUser(state)
+									props.saveUser(state, props.type)
 								}}>
 							SAVE
 						</Button>
@@ -110,15 +119,23 @@ const NewEditUserModal = (props) => {
 			;
 };
 
+const mapStateToProps = (state) => {
+	return {
+		type: state.modal.type
+	};
+};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		closeModal: () => {
 			dispatch(closeModal())
 		},
-		createUser: (user) => {
-			dispatch(createUser(user))
+		saveUser: (user, modalType) => {
+			modalType === modalTypes.NEW_USER ?
+			dispatch(createUser(user)) :
+					dispatch(editUser(user))
 		}
 	};
 };
 
-export default connect(null, mapDispatchToProps)(NewEditUserModal);
+export default connect(mapStateToProps, mapDispatchToProps)(NewEditUserModal);

@@ -17,6 +17,18 @@ const reducer = (state = initialState, action) => {
 				users: [action.payload.user, ...state.users]
 			}
 		}
+		case actionTypes.EDIT_USER: {
+			const {users} = state;
+			const editedUser = action.payload;
+			const updatedUsers = users.map(u => {
+				return u.id === editedUser.id ? editedUser : u;
+			});
+
+			return {
+				...state,
+				users: updatedUsers
+			}
+		}
 		case actionTypes.OPEN_MODAL: {
 			return {
 				...state,

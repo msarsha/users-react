@@ -9,12 +9,16 @@ import EditIcon from '@material-ui/icons/Edit'
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap'
 import React from "react";
 
-const UserCard = ({user}) => {
+const UserCard = ({user, onEdit}) => {
+	const onEditClick = () => {
+		onEdit(user);
+	};
+
 	return (
 			<Card className="user-card">
 				<div className="card-actions">
 					<Tooltip title="Edit" placement="top">
-						<IconButton>
+						<IconButton onClick={onEditClick}>
 							<EditIcon/>
 						</IconButton>
 					</Tooltip>
@@ -28,7 +32,7 @@ const UserCard = ({user}) => {
 						component="img"
 						alt="Contemplative Reptile"
 						height="250"
-						image={user.image || 'https://randomuser.me/api/portraits/men/47.jpg'}
+						image={user.image || 'https://via.placeholder.com/600x400'}
 						title="Contemplative Reptile"
 				/>
 				<CardContent>

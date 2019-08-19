@@ -21,7 +21,9 @@ function App(props) {
 						Random
 					</Button>
 				</div>
-				{props.users.length ? <UsersGrid users={props.users}/> : <NoUsers/>}
+				{props.users.length ? <UsersGrid users={props.users} onEdit={(user) => {
+					props.editUserModal(user);
+				}}/> : <NoUsers/>}
 
 				<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
 					<ModalContainer/>
@@ -41,6 +43,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		newUserModal: () => {
 			dispatch(openModal(modalTypes.NEW_USER))
+		},
+		editUserModal: (user) => {
+			dispatch(openModal(modalTypes.EDIT_USER, {user}))
 		},
 		closeModal: () => {
 			dispatch(closeModal());

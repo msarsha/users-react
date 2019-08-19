@@ -13,13 +13,19 @@ export const openModal = (type, props = null) => dispatch => {
 };
 
 export const createUser = (user) => dispatch => {
-	console.log("creating user");
 	// mock request to server
 	setTimeout(() => {
 		const userWithId = {...user, id: (new Date()).getTime()};
 		dispatch(actionCreators.createUser(userWithId));
 		dispatch(actionCreators.closeModal());
-		console.log("user created");
+	}, 1000)
+};
+
+export const editUser = (user) => dispatch => {
+	// mock request to server
+	setTimeout(() => {
+		dispatch(actionCreators.editUser(user));
+		dispatch(actionCreators.closeModal());
 	}, 1000)
 };
 
