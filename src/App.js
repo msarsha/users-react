@@ -12,6 +12,14 @@ import {closeModal} from "./store/actionCreators";
 
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from "@date-io/date-fns";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+const getProgressStyles = () => {
+	return {
+		width: '25px',
+		height: '25px'
+	}
+};
 
 function App(props) {
 	function renderUsersGrid() {
@@ -31,11 +39,11 @@ function App(props) {
 	return (
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<div className="buttons">
-					<Button variant="contained" color="primary" onClick={props.newUserModal}>
+					<Button disabled={props.loading} variant="contained" color="primary" onClick={props.newUserModal}>
 						New
 					</Button>
-					<Button variant="contained" color="primary" onClick={props.createRandom}>
-						Random
+					<Button disabled={props.loading} variant="contained" color="primary" onClick={props.createRandom}>
+						{props.loading ? <CircularProgress className="button-progress" color="secondary" style={getProgressStyles()}/> : 'Random'}
 					</Button>
 				</div>
 				{props.users.length ?
@@ -49,8 +57,8 @@ function App(props) {
 	)
 }
 
-const mapStateToProps = (state) => {
-	return {users: state.users, modal: state.modal};
+const mapStateToProps = ({users, modal, loading}) => {
+	return {users, modal, loading};
 };
 
 const mapDispatchToProps = dispatch => {

@@ -23,3 +23,11 @@ export const openModal = (type, props) => ({
 export const closeModal = () => ({
 	type: actionTypes.CLOSE_MODAL
 });
+
+export const loadingDone = () => ({
+	type: actionTypes.LOADING_DONE
+});
+
+export const loading = () => ({
+	type: actionTypes.LOADING
+});

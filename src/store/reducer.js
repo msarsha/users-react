@@ -8,7 +8,11 @@ const initialState = {
 	}
 };
 
-//TODO split reducers and use combineReducers (modal reducer, users reducer)
+/*
+ Refactor notes:
+ The reducer need to be splitted to userReducer, modalReducer and loadingReducer using combineReducers.
+*/
+
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.CREATE_USER: {
@@ -28,7 +32,6 @@ const reducer = (state = initialState, action) => {
 			}
 		}
 		case actionTypes.DELETE_USER: {
-			console.log('delete');
 			const {users} = state;
 			const deletedUser = action.payload;
 			const updatedUsers = users.filter(u => u.id !== deletedUser.id);
@@ -56,6 +59,18 @@ const reducer = (state = initialState, action) => {
 					open: false
 				}
 			};
+		}
+		case actionTypes.LOADING: {
+			return {
+				...state,
+				loading: true
+			}
+		}
+		case actionTypes.LOADING_DONE: {
+			return {
+				...state,
+				loading: false
+			}
 		}
 		default:
 			return state;

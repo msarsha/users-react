@@ -1,4 +1,6 @@
 import * as actionCreators from "./actionCreators";
+import {loading} from "./actionCreators";
+import {loadingDone} from "./actionCreators";
 
 export const openModal = (type, props = null) => dispatch => {
 	dispatch(actionCreators.openModal(type, props));
@@ -6,9 +8,11 @@ export const openModal = (type, props = null) => dispatch => {
 
 export const createRandomUser = () => {
 	return async (dispatch) => {
+		dispatch(loading());
 		const randomUserResult = await fetch('https://randomuser.me/api/?inc=name,email,picture,login,dob,location').then(res => res.json());
 		const mappedUser = randomUserResult.results.map(userResultMapper)[0];
 		dispatch(actionCreators.createUser(mappedUser));
+		dispatch(loadingDone());
 	};
 };
 
