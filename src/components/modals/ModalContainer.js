@@ -1,3 +1,4 @@
+import './ModalContainer.css';
 import React from "react";
 import {connect} from "react-redux";
 import {modalTypesMap} from "./modalTypes";

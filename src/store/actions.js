@@ -32,12 +32,11 @@ export const editUserAndCloseModal = (user) => dispatch => {
 };
 
 export const deleteUserAndCloseModal = (user) => dispatch => {
-	mockRequestAndCloseModal(dispatch).then(() => {
-		dispatch(actionCreators.deleteUser(user));
-	});
+	dispatch(actionCreators.deleteUser(user));
+	dispatch(actionCreators.closeModal());
 };
 
-const mockRequestAndCloseModal = (dispatcher) => {
+const mockRequestAndCloseModal = (dispatcher, withLoader = true) => {
 	dispatcher(loading());
 	return new Promise((resolve) => {
 		setTimeout(() => {

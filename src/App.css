@@ -1,102 +1,11 @@
-.users-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 400px);
-	grid-template-rows: auto;
-	grid-gap: 30px;
-	justify-content: center;
-	padding: 20px;
-}
-
-.user-card {
-	position: relative;
-	height: 350px;
-}
-
-.card-actions {
-	position: absolute;
-	right: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100%;
-	background: rgba(255, 255, 255, 0.4);
-}
-
 .buttons {
 	display: flex;
 	justify-content: center;
 	padding: 20px;
 }
 
-.buttons button {
+		.buttons button {
 	margin: 0 5px;
 	min-width: 100px;
 	height: 40px;
-}
-
-.no-users {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.modal-container {
-	padding: 30px;
-}
-
-.user-modal-form {
-	margin: 50px auto;
-	max-width: 800px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.user-modal-toolbar h5 {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.image-picker-container {
-	position: relative;
-	cursor: pointer;
-}
-
-.image-picker-container:hover:before {
-	content: "Pick Image";
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.33);
-}
-
-.user-view-modal {
-	display: flex;
-	flex-direction: column;
-}
-
-.user-view-modal img {
-	object-fit: cover;
-}
-
-.user-view-modal span {
-	font-weight: bold;
-}
-
-.user-view-group {
-	display: flex;
-	align-items: center;
-}
-
-.user-view-modal .user-view-close-btn {
-	position: absolute;
-	right: 0;
-	top: -7px;
 }

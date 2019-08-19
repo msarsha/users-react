@@ -1,3 +1,4 @@
+import './NewEditUserModal.css';
 import React, {useEffect, useReducer, useState} from "react";
 import {Button} from "@material-ui/core";
 import {closeModal} from "../../store/actionCreators";
@@ -42,14 +43,18 @@ const getProgressStyles = () => {
 	}
 };
 
+/*
+	Refactor notes:
+	Component can be refactored a bit, for example creating a component for the user form itself
+*/
+
 const NewEditUserModal = (props) => {
 	let form;
 
 	const [valid, setValid] = useState(false);
-	const [state, dispatch] = useReducer(userFormReducer, props.user || {});
+	const [state, dispatch] = useReducer(userFormReducer, props.user || {bday: new Date()});
 
 	useEffect(() => {
-		dispatch({type: actionTypes.INPUT_CHANGE, value: new Date(), name: 'bday'});
 		setValid(form.checkValidity());
 	}, [form]);
 

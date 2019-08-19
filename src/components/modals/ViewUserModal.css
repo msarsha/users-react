@@ -1,0 +1,23 @@
+.user-view-modal {
+	display: flex;
+	flex-direction: column;
+}
+
+.user-view-modal img {
+	object-fit: cover;
+}
+
+.user-view-modal span {
+	font-weight: bold;
+}
+
+.user-view-group {
+	display: flex;
+	align-items: center;
+}
+
+.user-view-modal .user-view-close-btn {
+	position: absolute;
+	right: 0;
+	top: -7px;
+}
