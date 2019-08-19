@@ -16,7 +16,6 @@ import DateFnsUtils from "@date-io/date-fns";
 function App(props) {
 	return (
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<React.Fragment>
 					<div className="buttons">
 						<Button variant="contained" color="primary" onClick={props.newUserModal}>
 							New
@@ -32,7 +31,6 @@ function App(props) {
 					<Dialog fullScreen={props.modal.fullscreen} open={props.modal.open} onClose={props.modal.closeModal}>
 						<ModalContainer/>
 					</Dialog>
-				</React.Fragment>
 			</MuiPickersUtilsProvider>
 	)
 }
