@@ -21,6 +21,7 @@ export const createUserAndCloseModal = (user) => dispatch => {
 		const userWithId = {...user, id: (new Date()).getTime()};
 		userWithId.image = user.image || 'https://via.placeholder.com/600x400';
 		dispatch(actionCreators.createUser(userWithId));
+		dispatch(loadingDone());
 	});
 };
 
@@ -37,11 +38,13 @@ export const deleteUserAndCloseModal = (user) => dispatch => {
 };
 
 const mockRequestAndCloseModal = (dispatcher) => {
+	dispatcher(loading());
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
 		}, 1000)
 	}).then(() => {
+		dispatcher(loadingDone());
 		dispatcher(actionCreators.closeModal());
 	})
 };

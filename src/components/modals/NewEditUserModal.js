@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import {createUserAndCloseModal, deleteUserAndCloseModal, editUserAndCloseModal} from "../../store/actions";
 import {modalTypes} from "./modalTypes";
 import {KeyboardDatePicker} from "@material-ui/pickers";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const actionTypes = {
 	INPUT_CHANGE: 'INPUT_CHANGE',
@@ -34,6 +35,13 @@ const fields = [
 	{name: 'email', label: 'Email', type: 'email'}
 ];
 
+const getProgressStyles = () => {
+	return {
+		width: '25px',
+		height: '25px'
+	}
+};
+
 const NewEditUserModal = (props) => {
 	let form;
 
@@ -41,6 +49,7 @@ const NewEditUserModal = (props) => {
 	const [state, dispatch] = useReducer(userFormReducer, props.user || {});
 
 	useEffect(() => {
+		dispatch({type: actionTypes.INPUT_CHANGE, value: new Date(), name: 'bday'});
 		setValid(form.checkValidity());
 	}, [form]);
 
@@ -105,7 +114,7 @@ const NewEditUserModal = (props) => {
 							margin="normal"
 							label="Birth Date"
 							format="dd/MM/yyyy"
-							value={state['bday'] || new Date()}
+							value={state.bday || new Date()}
 							onChange={(e) => {
 								handleInputChange('bday', e);
 							}}
@@ -128,6 +137,7 @@ const NewEditUserModal = (props) => {
 					))}
 					<div>
 						<Button
+								disabled={props.loading}
 								variant="contained"
 								style={getDeleteButtonStyle()}
 								color="secondary"
@@ -139,11 +149,11 @@ const NewEditUserModal = (props) => {
 						<Button
 								variant="contained"
 								color="inherit"
-								disabled={!valid}
+								disabled={!valid || props.loading}
 								onClick={() => {
 									props.saveUser(state, props.type)
 								}}>
-							SAVE
+							{props.loading ? <CircularProgress className="button-progress" color="secondary" style={getProgressStyles()}/> : 'Save'}
 						</Button>
 					</div>
 				</form>
@@ -151,9 +161,10 @@ const NewEditUserModal = (props) => {
 	);
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({modal, loading}) => {
 	return {
-		type: state.modal.type
+		type: modal.type,
+		loading
 	};
 };
 
